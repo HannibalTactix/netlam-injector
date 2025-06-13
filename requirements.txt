@@ -1,1 +1,3 @@
-google-generativeai
+# requirements.txt  — pull straight from the public repo
+git+https://github.com/google-gemini/deprecated-generative-ai-python.git@main#egg=google-generativeai
+
