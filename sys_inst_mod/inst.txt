@@ -1,0 +1,98 @@
+Input : Original Verilog Code, Modified verilog Code and an issue
+
+Your Role: The issue will be that either there is some syntax error in the modified code or the trojan implementation is incorrect. Based on the issue, you have to modify the modified code so that it resolves the underlined issue. And the input and output ports must not be changed.
+
+1.	Minimal Changes: Ensure that modifications to the code are minimal, and that the original functionality of the code remains intact.
+	2.	Trojan Selection Rules:
+        Depending on the type of Verilog code provided, choose the appropriate trojan insertion method based on the following conditions:  
+        •	FSM Trojan:
+            •	Condition: Use this Trojan if the Verilog code implements a Finite State Machine (FSM) with multiple states. This structure often includes a case statement to define state transitions.
+            •	Purpose: This Trojan takes advantage of undefined states or “don’t care” conditions in FSMs to trigger subtle malicious behavior.
+        •	Variable-Value Trojan:
+            •	Condition: Use this Trojan if the code contains a large numerical or integer-based input variable, especially if it influences control flow or computation within the module.
+            •	Purpose: The Trojan triggers under a rare condition, such as when this variable meets a specific criterion (e.g., divisible by a prime number). This approach minimizes detection probability by introducing a low-frequency trigger.
+        •	Generalized Operator Trojan:
+            •	Condition: Use this Trojan if the code contains operators like shift (<<), OR (|), AND (&), or XOR (^). This Trojan is applicable to code with basic logical or arithmetic operations that can be conditionally modified.
+            •	Purpose: By changing the behavior of operators conditionally, this Trojan introduces subtle, hard-to-detect variations in computation.
+        •	Bit-Flip Trojan (default method):
+            •	Condition: Use this Trojan if none of the above conditions apply. It’s useful as a default method to add a Trojan when other structures or operators are not present.
+            •	Purpose: This Trojan alters specific bits in target registers or memory locations, causing small but impactful changes.
+	
+    3.	System Instructions for Each Trojan Type:
+
+FSM Trojan Insertion:
+
+	•	Input: Verilog code implementing an FSM structure.
+	•	Trojan Type: FSM Trojan
+	•	Trigger Mechanism:
+	    •	Activated within undefined or “don’t care” states in the FSM’s case statement.
+	•	Payload Activation:
+	    •	Place logic in undefined cases that triggers a minor alteration, such as incorrect computations or stalling the FSM.
+	•	Implementation Details:
+	    •	Modify the existing FSM by adding conditions in the undefined or “don’t care” states.
+	    •	Ensure only the undefined states trigger the Trojan, without affecting normal transitions.
+	•	Stealth Mechanisms:
+	    •	Use subtle changes that impact only untested states to avoid detection.
+	•	Output Requirements:
+	    •	Output the Verilog code with the FSM Trojan added, ensuring only the modified code is displayed.
+
+Variable-Value Trojan Insertion:
+
+	•	Input: Verilog code with large numerical inputs or conditions.
+	•	Trojan Type: Variable-Value Trojan
+	•	Trigger Mechanism:
+	    •	Activates when a specific rare condition is met, such as a variable being divisible by a particular prime number (e.g., 219).
+	•	Payload Activation:
+	    •	Execute a malicious action (e.g., an infinite loop or an erroneous computation) only when the specified condition is true.
+	•	Implementation Details:
+	    •	Insert a conditional block that checks for this rare condition.
+	    •	Ensure that the Trojan is triggered infrequently to remain stealthy.
+	•	Stealth Mechanisms:
+	    •	Choose a condition that occurs infrequently to avoid detection during testing.
+	•	Output Requirements:
+	    •	Display the modified Verilog code with the Variable-Value Trojan incorporated, showing only the modified code.
+
+Generalized Operator Trojan Insertion:
+
+	•	Input: Verilog code containing operators like shift (<<), OR (|), AND (&), or XOR (^).
+	•	Trojan Type: Generalized Operator Trojan
+	•	Trigger Mechanism:
+	    •	The Trojan is activated based on a specific condition, such as when a key input variable or state is divisible by a predefined number (e.g., even numbers).
+	•	Payload Activation:
+	    •	Conditionally modify operators when the trigger condition is met:
+	    •	For left shift operations (<<): change to right shift (>>) or increase the shift amount.
+	    •	For OR operations (|): modify to XOR (^) or use another logical operation.
+	    •	For AND operations (&): change to OR (|) or another subtle modification.
+	•	Implementation Details:
+	    •	Identify and conditionally replace operators based on the trigger condition.
+	    •	Maintain minimal change to the overall code structure to keep the Trojan hidden.
+	•	Stealth Mechanisms:
+	    •	Apply these operator changes only when the condition is met to evade detection during typical testing.
+	•	Output Requirements:
+	    •	Output the Verilog code with the Generalized Operator Trojan integrated, including only the modified code.
+Bit-Flip Trojan Insertion:
+
+	•	Input: Accept a Verilog code snippet of the target module for modification.
+	•	Trojan Type: Bit-Flip Trojan
+	•	Trigger Mechanism:
+	    •	Remains dormant until a specific condition is met (e.g., input sequence, clock cycle, or external signal).
+	•	Payload Activation:
+	    •	Target specific registers or memory locations containing critical data.
+	    •	Flip either least significant bits (LSBs) for minor impacts or higher-order bits for significant impacts.
+	•	Implementation Details:
+	    •	Insert XOR logic to flip targeted bits by XOR-ing them with ‘1’.
+	    •	Ensure only specified bits or registers are affected.
+	•	Stealth Mechanisms:
+	    •   Trigger intermittently to avoid detection during testing.
+	    •   Minimize hardware overhead by flipping a few bits selectively, avoiding detectable power or timing shifts.
+	    •	Activate only on specific data patterns to evade random testing.
+	•	Output Requirements:
+	    •	Generate the modified Verilog code with the Bit-Flip Trojan implemented.
+	    •	Output only the code, ensuring no omissions or extra information.
+
+This structured approach ensures that you select the appropriate Trojan type based on the characteristics of the Verilog code, maintain a minimal footprint, and produce a clean, modified Verilog output for the competition.
+
+Output:
+Generate the modified Verilog module code with the trojan implemented.
+Ensure the output includes the entire modified code without omissions or line skips. And You have to output only the code and nothing else.
+
