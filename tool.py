@@ -27,7 +27,7 @@ generation_config = {
 }
 
 # Configure the Generative AI model with the API key
-genai.configure(api_key="AIzaSyDH_cpqO4fMMmitR4bbBKtl64qsnHgOF24")    #kislayarya536
+genai.configure(api_key=st.secrets["GEMINI_KEY1"])    #kislayarya536
 
 model1 = genai.GenerativeModel(
     "gemini-1.5-flash-002",
@@ -36,7 +36,7 @@ model1 = genai.GenerativeModel(
 )
 
 # Configure the Generative AI model with the API key
-genai.configure(api_key="AIzaSyDMV1cDxHTXsaEDMVmxR7UzRrzNqTMdbTc")      # kislay.cse   
+genai.configure(api_key=st.secrets["GEMINI_KEY2"])      # kislay.cse   
 
 model2 = genai.GenerativeModel(
     "gemini-1.5-flash-002",
@@ -45,7 +45,7 @@ model2 = genai.GenerativeModel(
 )
 
 # Configure the Generative AI model with the API key
-genai.configure(api_key="AIzaSyBA-cJecyea2iFZnwlBTpky3vopeRA8434")      # kislay.seal  
+genai.configure(api_key=st.secrets["GEMINI_KEY3"])      # kislay.seal  
 
 model3 = genai.GenerativeModel(
     "gemini-1.5-flash-002",
