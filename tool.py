@@ -30,7 +30,7 @@ generation_config = {
 genai.configure(api_key=st.secrets["GEMINI_KEY1"])    #kislayarya536
 
 model1 = genai.GenerativeModel(
-    "gemini-1.5-flash-002",
+    "gemini-2.5-flash",
     generation_config=generation_config,
     system_instruction=[file_contents[file1_path]],
 )
@@ -39,7 +39,7 @@ model1 = genai.GenerativeModel(
 genai.configure(api_key=st.secrets["GEMINI_KEY2"])      # kislay.cse   
 
 model2 = genai.GenerativeModel(
-    "gemini-1.5-flash-002",
+    "gemini-2.5-flash",
     generation_config=generation_config,
     system_instruction=[file_contents[file2_path]],
 )
@@ -48,7 +48,7 @@ model2 = genai.GenerativeModel(
 genai.configure(api_key=st.secrets["GEMINI_KEY3"])      # kislay.seal  
 
 model3 = genai.GenerativeModel(
-    "gemini-1.5-flash-002",
+    "gemini-2.5-flash",
     generation_config=generation_config,
     system_instruction=[file_contents[file3_path]],
 )
